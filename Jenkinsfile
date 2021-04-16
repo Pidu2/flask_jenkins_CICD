@@ -8,8 +8,8 @@ pipeline {
     stage("build") {
       steps{
         echo 'preparing the env'
-        sh 'pip install flake8 pytest --user'
-        sh 'pip install -r requirements.txt --user'
+        sh 'sudo pip install flake8 pytest --user'
+        sh 'sudo pip install -r requirements.txt --user'
       }
     }
 
