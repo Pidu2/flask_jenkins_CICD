@@ -1,5 +1,7 @@
 pipeline {
-  agent { docker { image 'python:3.8.6' }}
+  agent {
+    docker 'python:3.8.6'
+  }
 
   stages {
 
