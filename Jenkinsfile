@@ -10,7 +10,7 @@ pipeline {
         sh """
         . .env/bin/activate
         pip install flake8 pytest
-        sudo pip install -r requirements.txt
+        pip install -r requirements.txt
         """
       }
     }
