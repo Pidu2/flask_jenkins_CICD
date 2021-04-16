@@ -1,15 +1,17 @@
 pipeline {
-  agent {
-    docker 'python:3.8.6'
-  }
+  agent any
 
   stages {
 
     stage("build") {
       steps{
         echo 'preparing the env'
-        sh 'sudo pip install flake8 pytest --user'
-        sh 'sudo pip install -r requirements.txt --user'
+        sh 'python3 -m venv .env'
+        sh """
+        . .env/bin/activate
+        pip install flake8 pytest
+        sudo pip install -r requirements.txt
+        """
       }
     }
 
