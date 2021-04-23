@@ -31,7 +31,7 @@ pipeline {
         echo 'pushing the app'
         sh """
         tag=\$(date +"%Y%m%d%H%M")
-        docker build -t pidu2/webapp_test:\$tag
+        docker build -t pidu2/webapp_test:\$tag .
         """
       }
     }
