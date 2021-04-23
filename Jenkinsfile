@@ -46,8 +46,12 @@ pipeline {
     stage("deploy") {
       steps{
         echo 'deploying the app'
+        script {
+          def tfHome = tool name: ‘Terraform’
+          env.PATH = “${tfHome}:${env.PATH}”
+        }
         withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
-          sh "${env.TERRAFORM_HOME}/terraform init -input=false"
+          sh "terraform init -input=false"
         }
       }
     }
