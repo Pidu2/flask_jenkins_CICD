@@ -46,7 +46,7 @@ pipeline {
     stage("deploy") {
       steps{
         echo 'deploying the app'
-        sh '[ -f terraform ] && rm terraform;wget https://releases.hashicorp.com/terraform/0.15.0/terraform_0.15.0_linux_amd64.zip;unzip terraform_0.15.0_linux_amd64.zip;rm terraform_0.15.0_linux_amd64.zip' 
+        sh 'rm -f terraform terraform*.zip;wget https://releases.hashicorp.com/terraform/0.15.0/terraform_0.15.0_linux_amd64.zip;unzip terraform_0.15.0_linux_amd64.zip;rm terraform_0.15.0_linux_amd64.zip' 
         withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
           sh "./terraform init -input=false"
         }
