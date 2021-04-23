@@ -1,8 +1,11 @@
 pipeline {
   agent any
 
+  environment {
+    AWS_DEFAULT_REGION = "eu-central-1"
+  }
+  
   stages {
-
     stage("build") {
       steps{
         echo 'preparing the env'
@@ -43,6 +46,9 @@ pipeline {
     stage("deploy") {
       steps{
         echo 'deploying the app'
+        withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
+          sh "${env.TERRAFORM_HOME}/terraform init -input=false"
+        }
       }
     }
 
