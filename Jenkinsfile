@@ -26,12 +26,16 @@ pipeline {
       }
     }
 
-    stage("push") {
+    stage("build & push") {
       steps{
         echo 'pushing the app'
+        withCredentials([usernamePassword(credentialsId: 'webapp_test_jenkins', usernameVariable: 'NUSER', passwordVariable: 'NPASS')]) {
+          sh 'echo ${NPASS} | docker login -u ${NUSER} --password-stdin'
+        }
         sh """
         tag=\$(date +"%Y%m%d%H%M")
         docker build . -t pidu2/webapp_test:\$tag
+        docker push pidu2/webapp_test:\$tag
         """
       }
     }
