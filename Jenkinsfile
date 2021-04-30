@@ -55,9 +55,7 @@ pipeline {
           }
         }
         sh 'echo ip is: ${eip}'
-        //sh 'sudo apt update'
-        //sh 'sudo apt install ansible -y'
-        //sh 'ansible-playbook deploy_pb.yml -i 
+        ansiblePlaybook become: true, credentialsId: 'deployment_key', disableHostKeyChecking: true, installation: 'ansible', playbook: 'deploy.yml', inventory: '${eip},'
       }
     }
 
