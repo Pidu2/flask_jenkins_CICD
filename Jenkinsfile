@@ -54,7 +54,7 @@ pipeline {
             result=sh(script:'./terraform output eip', returnStdout: true).trim()
           }
         }
-        sh 'ip is: echo ${result}'
+        sh 'echo ip is: ${result}'
         //sh 'sudo apt update'
         //sh 'sudo apt install ansible -y'
         //sh 'ansible-playbook deploy_pb.yml -i 
