@@ -67,7 +67,7 @@ resource "aws_key_pair" "deployer" {
 resource "aws_instance" "deploy-server" {
   ami           = "ami-0767046d1677be5a0"
   instance_type = "t2.micro"
-  key_name = "${aws_instance.deployer.key_name}"
+  key_name = "${aws_key_pair.deployer.key_name}"
   security_groups = ["${aws_security_group.ingress-all-test.id}"]
   tags = {
     Name = "jenkins_tf_deployment"
@@ -82,7 +82,7 @@ resource "aws_eip" "ip-test-env" {
 
 resource "aws_internet_gateway" "deploy-env-gw" {
   vpc_id = "${aws_vpc.server-vpc.id}"
-  tags {
+  tags = {
     Name = "deploy-env-gw"
   }
 }
@@ -93,7 +93,7 @@ resource "aws_route_table" "route-table-deploy-env" {
     cidr_block = "0.0.0.0/0"
     gateway_id = "${aws_internet_gateway.deploy-env-gw.id}"
   }
-  tags {
+  tags = {
     Name = "test-env-route-table"
   }
 }
