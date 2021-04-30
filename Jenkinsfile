@@ -50,7 +50,11 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
           sh "./terraform init -input=false"
           sh "./terraform apply -auto-approve"
+          sh "./terraform output eip"
         }
+        //sh 'sudo apt update'
+        //sh 'sudo apt install ansible -y'
+        //sh 'ansible-playbook deploy_pb.yml -i 
       }
     }
 
