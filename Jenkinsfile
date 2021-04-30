@@ -50,7 +50,12 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
           sh "./terraform init -input=false"
           sh "./terraform apply -auto-approve"
+          script {
+            env.eip=sh(script:'./terraform output eip', returnStdout: true).trim()
+          }
         }
+        sh 'echo ip is: ${eip}'
+        ansiblePlaybook become: true, credentialsId: 'deployment_key', disableHostKeyChecking: true, installation: 'ansible', playbook: 'deploy.yml', inventory: '${eip},'
       }
     }
 
