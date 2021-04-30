@@ -51,7 +51,7 @@ pipeline {
           sh "./terraform init -input=false"
           sh "./terraform apply -auto-approve"
           script {
-            env.eip=sh(script:'./terraform output eip', returnStdout: true).trim()
+            env.eip=sh(script:'./terraform output eip', returnStdout: true).trim().replaceAll('"','')
           }
         }
         sh 'echo ip is: ${eip}'
