@@ -21,7 +21,7 @@ resource "aws_vpc" "server-vpc" {
 resource "aws_subnet" "subnet-uno" {
   cidr_block = "${cidrsubnet(aws_vpc.server-vpc.cidr_block, 3, 1)}"
   vpc_id = "${aws_vpc.server-vpc.id}"
-  availability_zone = "eu-central-1"
+  availability_zone = "eu-central-1a"
 }
 
 resource "aws_security_group" "ingress-all-test" {
@@ -61,7 +61,7 @@ resource "aws_security_group" "ingress-all-test" {
 
 resource "aws_key_pair" "deployer" {
   key_name   = "deployer-key"
-  public_key = "sh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDSMFYxg3dOpues6EMrI/c3YAE07PAeswnfo9F/5vgh9Wrr7qK6QcQ7Fs+5O5Hm0k3AQoE2sTpANcqITKJsaYnd5i5ii8ehGg7eGPijLv+3Kz4fzxXfOdjSEMkDQemM5RkDnZoM/rS76DF1JF99ls2eJ05bH/l9mB9uXfhCCymwGxmYEF4B2diK4IJ6XQQomOCDXYYd+RQt5GNi1feEVbcjgPw1k9/P16B4Nu2jI1S3iW0xIxkAeoDqu8HiYQJRfG7XR7otcI1zJVrwMQYAtn1SLnQAnd+BpXcT0wGejEItvrOqS7uEChB20xa2345TnBHS5oos4FfjZAYuHpZug9TYOU1w+MxB5+kXOKJP00+IHcsZXdJTOGizHQUQTi9YLBteyY8TD5WICBLmmHieqkZrgMRH3xYq4+kz+OzU+QkUlI2fNv6+l4FLs4G1yA1nRnX5z3TndN9LyU1eqmLHkyP07clNMvpnffbVtMnNvcrS/2GIh6LtnH2utMARHIMqUN0= deployer@deployer"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDSMFYxg3dOpues6EMrI/c3YAE07PAeswnfo9F/5vgh9Wrr7qK6QcQ7Fs+5O5Hm0k3AQoE2sTpANcqITKJsaYnd5i5ii8ehGg7eGPijLv+3Kz4fzxXfOdjSEMkDQemM5RkDnZoM/rS76DF1JF99ls2eJ05bH/l9mB9uXfhCCymwGxmYEF4B2diK4IJ6XQQomOCDXYYd+RQt5GNi1feEVbcjgPw1k9/P16B4Nu2jI1S3iW0xIxkAeoDqu8HiYQJRfG7XR7otcI1zJVrwMQYAtn1SLnQAnd+BpXcT0wGejEItvrOqS7uEChB20xa2345TnBHS5oos4FfjZAYuHpZug9TYOU1w+MxB5+kXOKJP00+IHcsZXdJTOGizHQUQTi9YLBteyY8TD5WICBLmmHieqkZrgMRH3xYq4+kz+OzU+QkUlI2fNv6+l4FLs4G1yA1nRnX5z3TndN9LyU1eqmLHkyP07clNMvpnffbVtMnNvcrS/2GIh6LtnH2utMARHIMqUN0= deployer@deployer"
 }
 
 resource "aws_instance" "deploy-server" {
