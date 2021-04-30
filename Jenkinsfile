@@ -51,10 +51,10 @@ pipeline {
           sh "./terraform init -input=false"
           sh "./terraform apply -auto-approve"
           script {
-            result=sh(script:'./terraform output eip', returnStdout: true).trim()
+            env.eip=sh(script:'./terraform output eip', returnStdout: true).trim()
           }
         }
-        sh 'echo ip is: ${result}'
+        sh 'echo ip is: ${eip}'
         //sh 'sudo apt update'
         //sh 'sudo apt install ansible -y'
         //sh 'ansible-playbook deploy_pb.yml -i 
