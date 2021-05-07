@@ -5,9 +5,9 @@ terraform {
       version = "3.34.0"
     }
   }
-  backend "local" {
-    path = "/var/tf/terraform.tfstate"
-  }
+  #backend "local" {
+  #  path = "/var/tf/terraform.tfstate"
+  #}
 }
 
 provider "aws" {}
