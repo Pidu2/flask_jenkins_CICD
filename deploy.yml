@@ -45,7 +45,7 @@
       groups: docker
       append: yes
 
-  - name: Install bottle python package
+  - name: Install docker python package
     pip:
       name: docker
       
