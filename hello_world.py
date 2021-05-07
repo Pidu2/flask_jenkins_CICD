@@ -26,7 +26,7 @@ def random(fr, to):
 
 @app.route('/test)
 def test_endpoint():
-    return "test succeeded
+    return "test succeeded"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True, port=8888)
