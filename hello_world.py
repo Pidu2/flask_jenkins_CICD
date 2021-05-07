@@ -24,7 +24,7 @@ def random(fr, to):
     except ValueError:
         return "ERROR"
 
-    
+
 @app.route('/test')
 def test_endpoint():
     return "test succeeded"
