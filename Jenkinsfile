@@ -55,7 +55,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'aws', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY')]) {
           sh "terraform init -input=false -force-copy"
           sh "terraform plan -out plan"
-          sh "terraform apply plan -auto-approve"
+          sh "terraform apply -auto-approve plan"
           script {
             env.eip=sh(script:'terraform output eip', returnStdout: true).trim().replaceAll('"','')
           }
