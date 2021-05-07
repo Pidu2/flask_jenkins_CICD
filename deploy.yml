@@ -18,7 +18,7 @@
 
   - name: Install prerequisites for Docker repository
     apt:
-      name: ['apt-transport-https', 'ca-certificates', 'curl', 'gnupg2', 'software-properties-common']
+      name: ['apt-transport-https', 'ca-certificates', 'curl', 'gnupg2', 'software-properties-common', 'python3-pip']
       update_cache: yes
 
   - name: Add Docker GPG key
