@@ -71,7 +71,7 @@ resource "aws_instance" "deploy-server" {
   ami           = "ami-0767046d1677be5a0"
   instance_type = "t2.micro"
   key_name = "${aws_key_pair.deployer.key_name}"
-  security_groups = ["${aws_security_group.ingress-all-test.id}"]
+  vpc_security_group_ids = ["${aws_security_group.ingress-all-test.id}"]
   tags = {
     Name = "jenkins_tf_deployment"
   }
