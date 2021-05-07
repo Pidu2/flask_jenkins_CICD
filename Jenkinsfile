@@ -3,6 +3,7 @@ pipeline {
 
   environment {
     AWS_DEFAULT_REGION = "eu-central-1"
+    TF_IN_AUTOMATION = 'true'
     TAG = """${sh(
              returnStdout: true,
              script: 'date +"%Y%m%d%H%M"'
