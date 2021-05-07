@@ -32,6 +32,11 @@
     apt:
       name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
       update_cache: yes
+      
+  - name: Start docker service
+    service:
+      name: docker
+      state: started
 
   - name: Add ubuntu user to docker group
     ansible.builtin.user:
@@ -39,3 +44,16 @@
       group: ubuntu
       groups: docker
       append: yes
+
+  - name: Install bottle python package
+    pip:
+      name: docker
+      
+  - name: Create  container
+    docker_container:
+      name: webapp
+      image: "pidu2/webapp_test:{{ webapp_test_version }}"
+      state: started
+      ports:
+        - "443:443"
+        - "80:80"
