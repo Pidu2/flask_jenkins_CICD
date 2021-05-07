@@ -3,6 +3,10 @@ pipeline {
 
   environment {
     AWS_DEFAULT_REGION = "eu-central-1"
+    TAG = """${sh(
+             returnStdout: true,
+             script: 'date +"%Y%m%d%H%M"'
+    )}"""
   }
   
   stages {
@@ -36,9 +40,9 @@ pipeline {
           sh 'echo ${NPASS} | docker login -u ${NUSER} --password-stdin'
         }
         sh """
-        tag=\$(date +"%Y%m%d%H%M")
-        docker build . -t pidu2/webapp_test:\$tag
-        docker push pidu2/webapp_test:\$tag
+        #=\$(date +"%Y%m%d%H%M")
+        docker build . -t pidu2/webapp_test:\$TAG
+        docker push pidu2/webapp_test:\$TAG
         """
       }
     }
@@ -55,7 +59,7 @@ pipeline {
           }
         }
         sh 'echo ip is: ${eip}'
-        ansiblePlaybook become: true, credentialsId: 'deployment_key', disableHostKeyChecking: true, installation: 'ansible', playbook: 'deploy.yml', inventory: '${eip},'
+        ansiblePlaybook become: true, credentialsId: 'deployment_key', disableHostKeyChecking: true, installation: 'ansible', playbook: 'deploy.yml', extraVars: [webapp_test_version: '${TAG}'], inventory: '${eip},'
       }
     }
 
