@@ -6,7 +6,7 @@ pipeline {
     TAG = """${sh(
              returnStdout: true,
              script: 'date +"%Y%m%d%H%M"'
-    )}"""
+    ).trim()}"""
   }
   
   stages {
